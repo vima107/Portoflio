@@ -1,0 +1,17 @@
+<p>admin works!</p>
+
+<div>
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
+        <div>
+            <label for="name">User name</label>
+            <input type="text" formControlName="username">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" formControlName="password">
+        </div>
+        <div>
+            <button [disabled]="!loginForm.valid">Login</button>
+        </div>
+    </form>
+</div>
