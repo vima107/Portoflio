@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { FormGroup ,FormControl, ReactiveFormsModule } from '@angular/forms';
-import { required } from '@angular/forms/signals';
+import { Component, inject } from '@angular/core';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
@@ -9,9 +8,11 @@ import { required } from '@angular/forms/signals';
   styleUrl: './admin-login-page.css',
 })
 export class AdminLogin {
-    loginForm = new FormGroup({
-        username: new FormControl(''),
-        password: new FormControl('')
+    private builder = inject(FormBuilder);
+
+    loginForm = this.builder.group({
+        username : ['', Validators.required],
+        password : ['', Validators.required] 
     })
 
     submit(){
@@ -19,7 +20,7 @@ export class AdminLogin {
             alert("");
         }
         else{
-            alert("works");
+            alert(this.loginForm.value.username+" "+ this.loginForm.value.password);
         }
     }
 }
