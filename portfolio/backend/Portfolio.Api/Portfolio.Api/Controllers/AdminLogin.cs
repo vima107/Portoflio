@@ -7,10 +7,10 @@ namespace Portfolio.Api.Controllers
     [Route("/portfolio[controller]")]
     public class AdminLogin : ControllerBase
     {
-        [HttpGet]
-        public ActionResult<IEnumerable<LoginDTO>> verifyUser()
+        [HttpPost]
+        public ActionResult<IEnumerable<LoginDTO>> verifyUser([FromBody] LoginDTO loginDTO)
         {
-            if (LoginDTO.Equals("admin", "admin"))
+            if (loginDTO.Userame.Equals("VimalKumar") && loginDTO.Password.Equals("vima2002"))
             {
                 return Ok("Login successful");
             }
