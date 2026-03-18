@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { AdminLogin } from '../admin-login';
+import { AdminLoginService } from '../services/admin-login';
 
 @Component({
   selector: 'app-admin',
@@ -10,7 +10,7 @@ import { AdminLogin } from '../admin-login';
 })
 export class AdminLoginPage {
     private builder = inject(FormBuilder);
-    private adminLogin = inject(AdminLogin);
+    private adminLogin = inject(AdminLoginService);
 
     loginForm = this.builder.group({
         username : ['', Validators.required],
@@ -19,13 +19,7 @@ export class AdminLoginPage {
 
     submit(){
         if(this.loginForm.valid){
-            var result = this.adminLogin.getDetails(this.loginForm.value)
-            // .subscribe(
-            //    { next: (res)=>{
-
-            //     }
-            // }
-            // )
+            var result = this.adminLogin.getDetails(this.loginForm.value);
         }
         
     }

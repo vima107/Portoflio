@@ -5,7 +5,7 @@ import { FormBuilder } from '@angular/forms';
 @Injectable({
   providedIn: 'root',
 })
-export class AdminLogin {
+export class AdminLoginService {
     private http = inject(HttpClient)
     private url="";
 

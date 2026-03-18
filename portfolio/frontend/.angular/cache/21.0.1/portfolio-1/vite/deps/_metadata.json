@@ -1,43 +1,37 @@
 {
-  "hash": "d0d5bb55",
-  "configHash": "33055604",
+  "hash": "baa1fc2c",
+  "configHash": "7c18a616",
   "lockfileHash": "385218b1",
-  "browserHash": "048cc2c7",
+  "browserHash": "bbe47fcd",
   "optimized": {
+    "@angular/common/http": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "ad4f28fa",
+      "needsInterop": false
+    },
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "23f98403",
+      "fileHash": "8a7ed342",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "44e0ef73",
-      "needsInterop": false
-    },
-    "@angular/forms/signals": {
-      "src": "../../../../../../node_modules/@angular/forms/fesm2022/signals.mjs",
-      "file": "@angular_forms_signals.js",
-      "fileHash": "58e8ee56",
+      "fileHash": "5d357a0a",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "43d511f6",
+      "fileHash": "8a5800b0",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "bf4ba685",
-      "needsInterop": false
-    },
-    "@angular/common/http": {
-      "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
-      "file": "@angular_common_http.js",
-      "fileHash": "c949eecc",
+      "fileHash": "6aa3b90b",
       "needsInterop": false
     }
   },
@@ -47,9 +41,6 @@
     },
     "chunk-NLPYIBPX": {
       "file": "chunk-NLPYIBPX.js"
-    },
-    "chunk-Y6U652PN": {
-      "file": "chunk-Y6U652PN.js"
     },
     "chunk-GDEFZALO": {
       "file": "chunk-GDEFZALO.js"
