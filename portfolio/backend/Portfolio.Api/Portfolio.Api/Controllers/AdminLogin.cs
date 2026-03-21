@@ -18,10 +18,6 @@ namespace Portfolio.Api.Controllers
         [HttpPost]
         public IActionResult verifyUser([FromBody] LoginDTO loginDTO)
         {
-            //if (loginDTO.Userame.Equals("VimalKumar") && loginDTO.Password.Equals("vima2002"))
-            //{
-            //    return Ok("Login successful");
-            //}
             var user = _dBContext.Users.FirstOrDefault(u=> u.Name == loginDTO.Username && u.Password == loginDTO.Password);
             if(user != null)
             {
