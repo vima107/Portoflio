@@ -7,10 +7,10 @@ import { FormBuilder } from '@angular/forms';
 })
 export class AdminLoginService {
     private http = inject(HttpClient)
-    private url="";
+    private url="https://localhost:7018/portfolio/AdminLogin";
 
     getDetails(data: any){
         console.log(data);
-        // return this.http.get(this.url, data);
+        return this.http.post(this.url, data);
     }
 }

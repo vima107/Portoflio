@@ -19,8 +19,14 @@ export class AdminLoginPage {
 
     submit(){
         if(this.loginForm.valid){
-            var result = this.adminLogin.getDetails(this.loginForm.value);
+            this.adminLogin.getDetails(this.loginForm.value).subscribe({
+                next: (res: any) =>{
+                    alert(res.messege);
+                },
+                error: (err: any) =>{
+                    alert(err.error.messege);
+                }
+            });
         }
-        
     }
 }
