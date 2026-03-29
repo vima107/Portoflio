@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { AdminLoginService } from '../services/admin-login';
+import { RedirectCommand, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -9,10 +10,11 @@ import { AdminLoginService } from '../services/admin-login';
   styleUrl: './admin-login-page.css',
 })
 export class AdminLoginPage {
-    private builder = inject(FormBuilder);
+    private router = inject(Router);
+    private formBuilder = inject(FormBuilder);
     private adminLogin = inject(AdminLoginService);
 
-    loginForm = this.builder.group({
+    loginForm = this.formBuilder.group({
         username : ['', Validators.required],
         password : ['', Validators.required] 
     })
@@ -22,6 +24,7 @@ export class AdminLoginPage {
             this.adminLogin.getDetails(this.loginForm.value).subscribe({
                 next: (res: any) =>{
                     alert(res.messege);
+                    this.router.navigate(['/registeration-page']);
                 },
                 error: (err: any) =>{
                     alert(err.error.messege);

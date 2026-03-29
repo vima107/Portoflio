@@ -12,5 +12,7 @@ namespace Portfolio.Api.Entities
         public string Name { get; set; }
         [Column("password")]
         public string Password { get; set; }
+
+        public List<Description> Description { get; set; }
     }
 }
