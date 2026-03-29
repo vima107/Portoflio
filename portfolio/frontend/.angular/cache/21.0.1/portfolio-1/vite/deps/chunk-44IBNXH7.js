@@ -7,7 +7,7 @@ import {
   PLATFORM_BROWSER_ID,
   getDOM,
   setRootDomAdapter
-} from "./chunk-GDEFZALO.js";
+} from "./chunk-7SI6RGI2.js";
 import {
   XhrFactory,
   parseCookieValue
@@ -1748,4 +1748,4 @@ export {
   provideClientHydration,
   VERSION
 };
-//# sourceMappingURL=chunk-PVHY4V7L.js.map
+//# sourceMappingURL=chunk-44IBNXH7.js.map

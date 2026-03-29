@@ -9,7 +9,7 @@ create table users(
 create table description(
 	id int primary key,
 	userid int,
-	description varchar(2000),
+	description text,
 	foreign key (userid) references users(id)
 )
 
@@ -24,5 +24,13 @@ create table contact(
 	id int primary key,
 	userid int,
 	contact varchar(2000),
+	foreign key (userid) references users(id)
+)
+
+create table project(
+	id int primary key,
+	userid int,
+	title varchar(200),
+	description text,
 	foreign key (userid) references users(id)
 )
