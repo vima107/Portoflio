@@ -1,6 +1,14 @@
 <div>
     <form [formGroup]="userForm" (ngSubmit)="submit()">
         <div>
+            <label for="name">Name</label>
+            <input type="text" formControlName="name">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" formControlName="password">
+        </div>
+        <div>
             <label for="image">Profile picture</label>
             <input type="file" (change)="onImageChane($event)">
         </div>
@@ -13,16 +21,9 @@
             <button type="button" (click)="addSkill()">+</button>
             <div formArrayName="skills">
                 @for (s of skillArray().controls; track $index) {
-                    <div [formGroupName]="$index">
-                    <input formControlName="name" placeholder="enter skill">
-                    <textarea formControlName="description"
-                      placeholder="enter description"
-                      rows="5"
-                      style="width: 10%; resize: both;"></textarea>
+                    <input [formControlName]="$index" placeholder="enter skill">
                     <button type="button" (click)="removeSkill($index)">-</button>
-                </div>
                 }
-                
             </div>
         </div>
 
@@ -47,11 +48,11 @@
         <div>
             <label for="contact">Contact</label>
             <button type="button" (click)="addContact()">+</button>
-            <div formArrayName="contactDetails">
+            <div formArrayName="contacts">
                 @for(c of contactArray().controls; track $index){
                     <div [formGroupName]="$index">
-                    <input formControlName="type" placeholder="enter contact type">
-                    <input formControlName="url" placeholder="enter contact link">
+                    <input formControlName="contactType" placeholder="enter contact type">
+                    <input formControlName="contactValue" placeholder="enter contact link">
                     <button type="button" (click)="removeContact($index)">-</button>
                 </div>
                 }

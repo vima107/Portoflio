@@ -8,17 +8,16 @@ namespace Portfolio.Api.Controllers
     [Route("/portfolio/[controller]")]
     public class AdminLogin : ControllerBase
     {
-        private readonly DBContext _dBContext; 
-
+        private readonly DBContext _dbContext;
         public AdminLogin(DBContext dBContext)
         {
-            _dBContext = dBContext;
+            _dbContext = dBContext;
         }
 
         [HttpPost]
         public IActionResult verifyUser([FromBody] LoginDTO loginDTO)
         {
-            var user = _dBContext.Users.FirstOrDefault(u=> u.Name == loginDTO.Username && u.Password == loginDTO.Password);
+            var user = _dbContext.Users.FirstOrDefault(u=> u.Name == loginDTO.Username && u.Password == loginDTO.Password);
             if(user != null)
             {
                 return Ok(new { messege = "Login successful"});
