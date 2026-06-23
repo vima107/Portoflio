@@ -9,4 +9,9 @@ public class DBContext : DbContext
 
     }
     public DbSet<Users> Users { get; set; }
+    public DbSet<Description> Description { get; set; }
+    public DbSet<Skills> Skills { get; set; }
+    public DbSet<Projects> Projects { get; set; }
+    public DbSet<Contacts> Contact { get; set; }
+
 }

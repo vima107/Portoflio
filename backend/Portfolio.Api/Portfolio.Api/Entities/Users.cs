@@ -14,5 +14,8 @@ namespace Portfolio.Api.Entities
         public string Password { get; set; }
 
         public List<Description> Description { get; set; }
+        public List<Skills> Skills { get; set; }
+        public List<Projects> Projects { get; set; }
+        public List<Contacts> Contacts { get; set; }
     }
 }

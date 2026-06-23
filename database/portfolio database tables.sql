@@ -20,17 +20,18 @@ create table skills(
 	foreign key (userid) references users(id)
 )
 
-create table contact(
+create table contacts(
 	id int primary key,
 	userid int,
-	contact varchar(2000),
+	contacrType varchar(2000),
+	contactValue varchar text,
 	foreign key (userid) references users(id)
 )
 
-create table project(
+create table projects(
 	id int primary key,
 	userid int,
 	title varchar(200),
 	description text,
 	foreign key (userid) references users(id)
-)
+)	
