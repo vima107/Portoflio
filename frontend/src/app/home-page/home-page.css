@@ -1,0 +1,9 @@
+@media (max-width: 768px) {
+  img {
+    width: 200px !important;
+    height: 200px !important;
+  }
+}
+section#home {
+  padding-top: 70px;
+}

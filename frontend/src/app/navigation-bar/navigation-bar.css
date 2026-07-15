@@ -39,3 +39,12 @@
     align-items: center;
 
 }
+#nav-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #0f0f0f;
+  border-bottom: 0.5px solid #2a2a2a;
+}

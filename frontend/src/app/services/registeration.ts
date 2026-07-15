@@ -12,3 +12,4 @@ export class RegisterationService {
 		return this.http.post(this.url,data);
 	}
 }
+  

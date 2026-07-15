@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-projects-page',
@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './projects-page.css',
 })
 export class ProjectsPage {
-
+    @Input() data: any[] = [];
 }

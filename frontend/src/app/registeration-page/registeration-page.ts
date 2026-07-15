@@ -1,23 +1,32 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Form, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterationService } from '../services/registeration';
-import { required } from '@angular/forms/signals';
+import { QuillModule } from 'ngx-quill';
 
 @Component({
 	selector: 'app-registeration-page',
-	imports: [ReactiveFormsModule, CommonModule],
+	standalone: true,
+	imports: [ReactiveFormsModule, CommonModule, QuillModule],
 	templateUrl: './registeration-page.html',
-	styleUrl: './registeration-page.css',
+	styleUrls: ['./registeration-page.css']
 })
 export class RegisterationPage {
+	quillModules = {
+		toolbar: [
+			['bold', 'italic', 'underline'],
+			[{ 'list': 'ordered' }, { 'list': 'bullet' }],
+			['clean']
+		]
+	};
 	private formBuilder = inject(FormBuilder);
 	private registerationService = inject(RegisterationService);
 
 	userForm = this.formBuilder.group({
 		name: this.formBuilder.control('',Validators.required),
 		password: this.formBuilder.control('',Validators.required),
-		image: [null],
+		image: [null, Validators.required],
+		resume: [null, Validators.required],
 		description: ['', Validators.required],
 		skills: this.formBuilder.array([this.formBuilder.control('',Validators.required)]),
 		projects: this.formBuilder.array([
@@ -33,12 +42,21 @@ export class RegisterationPage {
 			})
 		])
 	})
-
-	onImageChane(event: any) {
+	
+	onImageChanege(event: any) {
 		const file = event.target.files[0];
 		if (file) {
 			this.userForm.patchValue({
 				image: file
+			})
+		}
+	}
+
+	onResumeChanege(event: any){
+		const file = event.target.files[0];
+		if(file){
+			this.userForm.patchValue({
+				resume: file
 			})
 		}
 	}
@@ -90,8 +108,39 @@ export class RegisterationPage {
 		alert("works");
 		console.log(this.userForm.value);
 		if (this.userForm.valid) {
-			this.registerationService.registerUser(this.userForm.value).subscribe({
-				
+			const formValue = this.userForm.value;
+			const formData = new FormData();
+
+			formData.append('name', formValue.name ?? '');
+			formData.append('password', formValue.password ?? '');
+			formData.append('description', formValue.description ?? '');
+			if (formValue.image) {
+				formData.append('image', formValue.image);
+			}
+			if(formValue.resume){
+				formData.append('resume', formValue.resume);
+			}
+			formValue.skills?.forEach((skill: string | null, index: number) => {
+				if (skill != null) {
+					formData.append(`skills[${index}]`, skill);
+				}
+			});
+
+			formValue.projects?.forEach((project: { title?: string | null; description?: string | null } | null, index: number ) => {
+				if (project != null) {
+					formData.append(`projects[${index}].title`, project.title ?? '');
+					formData.append(`projects[${index}].description`, project.description ?? '');
+				}
+			});
+
+			formValue.contacts?.forEach((contact: { contactType?: string | null; contactValue?: string | null } | null, index: number) => {
+				if (contact != null) {
+					formData.append(`contacts[${index}].contactType`, contact.contactType ?? '');
+					formData.append(`contacts[${index}].contactValue`, contact.contactValue ?? '');
+				}
+			});
+			this.registerationService.registerUser(formData).subscribe({
+				// handle response
 			});
 		}
 	}
