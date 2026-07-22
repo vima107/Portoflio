@@ -5,16 +5,26 @@
             <input type="text" formControlName="name">
         </div>
         <div>
+            <label for="name">Job Role</label>
+            <input type="text" formControlName="jobrole">
+        </div>
+        <div>
             <label for="password">Password</label>
             <input type="password" formControlName="password">
         </div>
         <div>
             <label for="image">Profile picture</label>
-            <input type="file" (change)="onImageChane($event)">
+            <input type="file" (change)="onImageChanege($event)">
+        </div>
+        <div>
+            <label for="image">Resume</label>
+            <input type="file" (change)="onResumeChanege($event)">
         </div>
         <div>
             <label for="description">Description</label>
-            <input type="text" formControlName="description">
+            <quill-editor 
+              formControlName="description"
+              [modules]="quillModules"></quill-editor>
         </div>
         <div>
             <label for="skill">Skills</label>
@@ -34,10 +44,11 @@
                 @for (p of projectsArray().controls; track $index) {
                     <div [formGroupName]="$index">
                     <input formControlName="title" placeholder="enter title">
-                    <textarea formControlName="description"
+                    <quill-editor formControlName="description"
                       placeholder="enter description"
                       rows="5"
-                      style="width: 10%; resize: both;"></textarea>
+                      [modules]="quillModules"
+                      style="width: 10%; resize: both;"></quill-editor>
                     <button type="button" (click)="removeProject($index)">-</button>
                 </div>
                 }

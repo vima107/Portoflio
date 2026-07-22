@@ -1,14 +1,21 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navigation-bar',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './navigation-bar.html',
   styleUrl: './navigation-bar.css',
 })
 export class NavigationBar {
-  hambergerBtnClick(event: HTMLElement) {
-    event.classList.toggle('change');
+  isMobileMenuOpen = false;
+
+  toggleMobileMenu(event: HTMLElement) {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    event.classList.toggle('change', this.isMobileMenuOpen);
+  }
+
+  scrollTo(section: string) {
+    this.isMobileMenuOpen = false;
+    document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
   }
 }

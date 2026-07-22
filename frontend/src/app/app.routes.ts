@@ -8,10 +8,7 @@ import { ProjectsPage } from './projects-page/projects-page';
 
 export const routes: Routes = [
     { path:'' ,redirectTo:'/home',pathMatch:'full' },
-    { path: 'home-page', component: HomePage },
-    { path: 'skills-page', component: SkillsPage },
-    { path: 'projects-page', component: ProjectsPage },
-    { path: 'contact-page', component: ContactPage },
+    { path: 'portfolio/:slug', component: HomePage },
     { path: 'admin-login-page', component: AdminLoginPage},
     { path: 'registeration-page', component:RegisterationPage }
 ];
