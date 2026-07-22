@@ -8,6 +8,7 @@
     display:flex;
     align-items:center;
     padding-top:100px;          /* navbar space */
+    padding-bottom: 30px;
 }
 
 .hero-greeting{
@@ -31,17 +32,18 @@
     margin-bottom:25px;
 }
 
-.hero-description{
-
-    color:#9b9b9b;
-
-    font-size:18px;
-
-    line-height:1.8;
-    border: 2px solid red;
-    max-width:560px;
-
-    margin-bottom:40px;
+.hero-description {
+    color: #9b9b9b;
+    font-size: 18px;
+    line-height: 1.8;
+    max-width: 960px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+.col-lg-7 {
+    overflow: hidden;
 }
 
 /* Buttons */
