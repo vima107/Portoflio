@@ -1,50 +1,168 @@
-.hamberger-container {
-  display: inline-block;
-  cursor: pointer;
+/* ==========================
+   Navbar
+========================== */
+
+#nav-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    background: rgba(17, 17, 17, 0.96);
+    backdrop-filter: blur(10px);
+
+    border-bottom: 1px solid #252525;
+
+    z-index: 9999;
+    padding: 20px 0;
+
+    transition: .3s ease;
 }
 
-.bar1, .bar2, .bar3 {
-  width: 35px;
-  height: 5px;
-  background-color: #333;
-  margin: 6px 0;
-  transition: 0.4s;
+/* ==========================
+   Desktop Menu
+========================== */
+
+#nav-bar-inner-container-2 {
+    display: flex;
+    align-items: center;
+    gap: 45px;
+}
+
+#nav-bar-inner-container-2 nav {
+    display: flex;
+}
+
+#nav-bar-inner-container-2 a {
+    color: #bdbdbd;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: .3s;
+    position: relative;
+}
+
+#nav-bar-inner-container-2 a:hover {
+    color: white;
+}
+
+/* Purple underline */
+
+#nav-bar-inner-container-2 a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -7px;
+
+    width: 0%;
+    height: 2px;
+
+    background: #7c3aed;
+
+    transition: .3s;
+}
+
+#nav-bar-inner-container-2 a:hover::after {
+    width: 100%;
+}
+
+/* ==========================
+   Hamburger
+========================== */
+
+.hamberger-container {
+    width: 30px;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.bar1,
+.bar2,
+.bar3 {
+    width: 30px;
+    height: 3px;
+    background: white;
+    margin: 6px 0;
+    border-radius: 3px;
+    transition: .35s ease;
 }
 
 .change .bar1 {
-  transform: translate(0, 11px) rotate(-45deg);
+    transform: translateY(9px) rotate(45deg);
 }
 
-.change .bar2 {opacity: 0;}
+.change .bar2 {
+    opacity: 0;
+}
 
 .change .bar3 {
-  transform: translate(0, -11px) rotate(45deg);
+    transform: translateY(-9px) rotate(-45deg);
 }
 
-#nav-bar-container{
-    border: 2px solid black;
+/* ==========================
+   Mobile Menu
+========================== */
+
+.mobile-menu {
+
+    display: none;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: #1a1a1a;
+
+    border: 1px solid #2d2d2d;
+
+    border-radius: 12px;
+}
+
+.mobile-menu.open {
     display: flex;
-    justify-content: space-between;
 }
 
-#nav-bar-inner-container-1{
-    border: 2px solid black;
-}
-
-#nav-bar-inner-container-2{
-    width:30vw;
-    border: 2px solid black;
+.mobile-menu nav {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+}
+
+.mobile-menu a {
+    color: #bdbdbd;
+    text-decoration: none;
+    font-size: 17px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.mobile-menu a:hover {
+    color: white;
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media (max-width: 991px) {
+
+    #nav-bar-container {
+        padding: 16px 0;
+    }
+
+    #nav-bar-inner-container-2 {
+        display: none;
+    }
 
 }
-#nav-bar-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: #0f0f0f;
-  border-bottom: 0.5px solid #2a2a2a;
+
+@media (min-width: 992px) {
+
+    .mobile-menu {
+        display: none !important;
+    }
+
 }

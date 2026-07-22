@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChange, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-skills-page',
@@ -8,4 +8,10 @@ import { Component, Input } from '@angular/core';
 })
 export class SkillsPage {
   @Input() data: any[] = [];
+  
+  ngOnChanges(changes: SimpleChanges){
+    if(changes['data']){
+      console.log(this.data);
+    }
+  }
 }

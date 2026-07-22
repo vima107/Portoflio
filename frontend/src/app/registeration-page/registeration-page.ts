@@ -24,6 +24,7 @@ export class RegisterationPage {
 
 	userForm = this.formBuilder.group({
 		name: this.formBuilder.control('',Validators.required),
+		jobrole: this.formBuilder.control('',Validators.required),
 		password: this.formBuilder.control('',Validators.required),
 		image: [null, Validators.required],
 		resume: [null, Validators.required],
@@ -112,6 +113,7 @@ export class RegisterationPage {
 			const formData = new FormData();
 
 			formData.append('name', formValue.name ?? '');
+			formData.append('jobrole', formValue.jobrole ?? '');
 			formData.append('password', formValue.password ?? '');
 			formData.append('description', formValue.description ?? '');
 			if (formValue.image) {

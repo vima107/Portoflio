@@ -1,2 +1,37 @@
-<p>contact-page works!</p>
-<p>{{data}}</p>
+<section class="contact-section">
+
+    <div class="container">
+
+        <div class="section-heading text-center">
+
+            <span>— contact —</span>
+
+            <h2>
+                Get in touch
+            </h2>
+
+        </div>
+
+
+        <div class="contact-links">
+
+            @for(contact of data; track $index){
+
+                <a class="contact-box"
+                   [href]="contact.contactValue">
+                    <i [class]="getContactIcon(contact.contactType)"></i>
+
+                </a>
+
+            }
+
+        </div>
+
+
+        <footer>
+            © 2026 Vimal Kumar
+        </footer>
+
+    </div>
+
+</section>

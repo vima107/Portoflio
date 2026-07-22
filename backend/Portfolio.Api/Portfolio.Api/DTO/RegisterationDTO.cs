@@ -8,6 +8,7 @@ namespace Portfolio.Api.DTO
         public IFormFile Resume { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
+        public string JobRole { get; set; }
         public string Description { get; set; }
         public List<string> Skills { get; set; }
         public List<Projects> Projects { get; set; }

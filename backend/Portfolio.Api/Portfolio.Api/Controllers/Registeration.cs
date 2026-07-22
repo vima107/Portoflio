@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Portfolio.Api.DatabaseContext;
 using Portfolio.Api.DTO;
 using Portfolio.Api.Entities;
+using Portfolio.Api.NewFolder;
 
 namespace Portfolio.Api.Controllers
 {
@@ -49,6 +50,8 @@ namespace Portfolio.Api.Controllers
                     Password = hashedPassword,
                     Image = image,
                     Resume = resume,
+                    JobRole = registerationDTO.JobRole,
+                    Role = UserTypeEnum.UserType.User.ToString(),
                     PortfolioUrl = uniqueSlug
                 };
                 _dbContext.Users.Add(user);

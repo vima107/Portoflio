@@ -1,56 +1,92 @@
 <app-navigation-bar></app-navigation-bar>
 
-<section id="home" style="background-color: #111111; min-height: 100vh;">
-  <div class="container h-100">
-    <div class="row align-items-center" style="min-height: 100vh;">
-      
-      <!-- Left: Text -->
-      <div class="col-lg-7 text-white py-5">
-        @if(portfolioData()) {
-          <p style="color: #888; font-size: 14px;">Hello, I'm</p>
-          <h1 style="font-size: 48px; font-weight: 600; color: #e0e0e0;">{{ portfolioData().name }}</h1>
-          <p style="color: #7c3aed; font-size: 16px;">Full Stack Developer</p>
-          <div style="color: #aaa;" [innerHTML]="portfolioData().description[0]?.descripiton"></div>
-          
-          <div class="d-flex gap-3 mt-4">
-            <a [href]="'data:application/pdf;base64,' + portfolioData().resume" 
-               download="resume.pdf"
-               class="btn px-4 py-2"
-               style="background-color: #7c3aed; color: #fff; border-radius: 6px;">
-              Download CV
-            </a>
-            <a href="#contact" 
-               class="btn px-4 py-2"
-               style="background-color: transparent; color: #aaa; border: 1px solid #333; border-radius: 6px;">
-              Contact me
-            </a>
-          </div>
-        } @else {
-          <p style="color: #555;">Loading...</p>
+<section id="home" class="hero-section">
+
+  <div class="container">
+
+    <div class="row align-items-center hero-row">
+  
+      <!-- Left Side -->
+
+      <div class="col-lg-7 order-2 order-lg-1">
+
+        @if(portfolioData()){   
+
+        <p class="hero-greeting">
+          Hello, I'm
+        </p>
+
+        <h1 class="hero-name">
+          {{portfolioData().name}}
+        </h1>
+
+        <h4 class="hero-role">
+          {{portfolioData().jobRole}}
+        </h4>
+
+        <div 
+          class="hero-description"
+          [innerHTML]="portfolioData().description[0]?.descripition">
+        </div>
+
+        <div class="d-flex flex-wrap gap-3 hero-buttons">
+
+          <a
+            class="btn btn-download"
+            [href]="'data:application/pdf;base64,' + portfolioData().resume"
+            download="resume.pdf">
+
+            Download CV
+
+          </a>
+
+          <a
+            href="#contact"
+            class="btn btn-contact">
+
+            Contact Me
+
+          </a>
+
+        </div>
+
         }
+
       </div>
 
-      <!-- Right: Image -->
-      <div class="col-lg-5 d-flex justify-content-center py-5">
-        @if(portfolioData()) {
-          <img [src]="'data:image/jpeg;base64,' + portfolioData().image" 
-               alt="Profile" 
-               style="width: 280px; height: 280px; object-fit: cover; border-radius: 12px; border: 1px solid #2a2a2a;">
+      <!-- Right Side -->
+
+      <div class="col-lg-5 d-flex justify-content-lg-end justify-content-center mt-5 mt-lg-0 order-1 order-lg-2">
+
+        @if(portfolioData()){
+
+        <div class="profile-card">
+
+          <img
+            [src]="'data:image/jpeg;base64,' + portfolioData().image"
+            class="profile-image"
+            alt="Profile">
+
+        </div>
+
         }
+
       </div>
 
     </div>
+
   </div>
+
 </section>
 
-<div id="skills">
+<section id="skills">
   <app-skills-page [data]="portfolioData()?.skills"></app-skills-page>
-</div>
+</section>
 
-<div id="projects">
+<section id="projects">
   <app-projects-page [data]="portfolioData()?.projects"></app-projects-page>
-</div>
+</section>
 
-<div id="contact">
+<section id="contact">
   <app-contact-page [data]="portfolioData()?.contacts"></app-contact-page>
-</div>
+</section>

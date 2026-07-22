@@ -12,6 +12,10 @@ namespace Portfolio.Api.Entities
         public string Name { get; set; }
         [Column("password")]
         public string Password { get; set; }
+        [Column("role")]
+        public string Role { get; set; }
+        [Column("jobrole")]
+        public string JobRole { get; set; }
         [Column("image")]
         public byte[] Image { get; set; }
         [Column("resume")]
