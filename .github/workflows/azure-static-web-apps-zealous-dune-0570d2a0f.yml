@@ -31,13 +31,18 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./frontend
-        run: npm install
+        run: npm install --include=dev
+
+      - name: Check Angular CLI
+        working-directory: ./frontend
+        run: |
+          ls -la node_modules/@angular/cli
+          ls -la node_modules/@angular/build
+          npm list @angular/cli
 
       - name: Build Angular
         working-directory: ./frontend
-        run: |
-          chmod +x node_modules/.bin/ng
-          npm run build
+        run: npm run build
 
       - name: Build And Deploy
         id: builddeploy
@@ -46,11 +51,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ZEALOUS_DUNE_0570D2A0F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-
           app_location: "./frontend"
           api_location: ""
           output_location: "dist/portfolio-1"
-
           skip_app_build: true
 
   close_pull_request_job:
@@ -58,7 +61,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    name: Close Pull Request Job
+    name: Close Pull Request
 
     steps:
       - name: Close Pull Request
