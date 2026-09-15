@@ -48,9 +48,47 @@ jobs:
           chmod +x node_modules/@angular/cli/bin/ng.js
           node node_modules/@angular/cli/bin/ng.js build
 
-      - name: Copy Static Web Apps config
+      - name: Check Angular build output
         run: |
-          cp frontend/staticwebapp.config.json frontend/dist/portfolio-1/staticwebapp.config.json
+          echo "Files inside frontend/dist:"
+          find frontend/dist -maxdepth 4 -type f | sort
+
+          echo ""
+          echo "Searching for index.html:"
+          find frontend/dist -name index.html -print
+
+      - name: Prepare deployment folder
+        run: |
+          mkdir -p frontend/deploy
+
+          INDEX_FILE=$(find frontend/dist -name index.html -print -quit)
+
+          if [ -z "$INDEX_FILE" ]; then
+            echo "ERROR: index.html was not found anywhere inside frontend/dist"
+            exit 1
+          fi
+
+          echo "Found index.html at: $INDEX_FILE"
+
+          BUILD_FOLDER=$(dirname "$INDEX_FILE")
+
+          echo "Copying Angular build from: $BUILD_FOLDER"
+
+          cp -R "$BUILD_FOLDER"/. frontend/deploy/
+
+          if [ -f frontend/staticwebapp.config.json ]; then
+            cp frontend/staticwebapp.config.json frontend/deploy/staticwebapp.config.json
+          fi
+
+          echo ""
+          echo "Deployment folder contents:"
+          find frontend/deploy -maxdepth 2 -type f | sort
+
+      - name: Verify deployment folder
+        run: |
+          test -f frontend/deploy/index.html
+          echo "index.html found successfully."
+          echo "Ready for Azure Static Web Apps deployment."
 
       - name: Build And Deploy
         id: builddeploy
@@ -59,7 +97,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ZEALOUS_DUNE_0570D2A0F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "./frontend/dist/portfolio-1"
+          app_location: "./frontend/deploy"
           api_location: ""
           output_location: ""
           skip_app_build: true
