@@ -6,7 +6,7 @@ import { inject, Injectable } from '@angular/core';
 })
 export class UserDetailsService {
 	private http = inject(HttpClient);
-	private url ="https://localhost:7018/portfolio/User/";
+	private url ="https://portfolio-api-azcrdtcrb3aycsbf.centralus-01.azurewebsites.net/portfolio/User/";
 
 	getUserDetails(slug: any){
 		return this.http.get(`${this.url}${slug}`);
