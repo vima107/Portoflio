@@ -24,7 +24,9 @@ builder.Services.AddDbContext<DBContext>(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular",
-        policy => policy.WithOrigins("http://localhost:4200")
+        policy => policy.WithOrigins("http://localhost:4200",
+        "https://zealous-dune-0570d2a0f.6.azurestaticapps.net"
+        )
         .AllowAnyMethod()
         .AllowAnyHeader());
 });
