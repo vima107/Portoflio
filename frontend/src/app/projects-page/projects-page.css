@@ -117,11 +117,14 @@
     -webkit-line-clamp:3;
 
     overflow:hidden;
+    word-break: break-word;
 }
 
 .project-description.expanded{
 
     display:block;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .view-btn{

@@ -18,7 +18,9 @@
             @for(contact of data; track $index){
 
                 <a class="contact-box"
-                   [href]="contact.contactValue">
+                    [href]="contact.contactValue"
+                    target="_blank"
+                    rel="noopener noreferrer">
                     <i [class]="getContactIcon(contact.contactType)"></i>
 
                 </a>

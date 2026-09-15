@@ -19,7 +19,7 @@ export class HomePage {
   
   slug = '';
   portfolioData = signal<any>(null); // use signal
-
+  isMobileMenuOpen = false;
   ngOnInit(){
     this.slug = this.route.snapshot.paramMap.get('slug') ?? '';
     this.userDetailsService.getUserDetails(this.slug).subscribe({
@@ -30,5 +30,8 @@ export class HomePage {
       error: (err) => console.log(err)
     });
   }
-	
+	scrollTo(section: string) {
+    this.isMobileMenuOpen = false;
+    document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+  }
 }

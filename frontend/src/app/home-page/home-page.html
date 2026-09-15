@@ -30,25 +30,16 @@
         </div>
 
         <div class="d-flex flex-wrap gap-3 hero-buttons">
+  <a [href]="'data:application/pdf;base64,' + portfolioData().resume" 
+     download="resume.pdf"
+     class="btn btn-download">
+    Download CV
+  </a>
 
-          <a
-            class="btn btn-download"
-            [href]="'data:application/pdf;base64,' + portfolioData().resume"
-            download="resume.pdf">
-
-            Download CV
-
-          </a>
-
-          <a
-            href="#contact"
-            class="btn btn-contact">
-
-            Contact Me
-
-          </a>
-
-        </div>
+  <a (click)="scrollTo('contact')" class="btn btn-contact">
+    Contact Me
+  </a>
+</div>
 
         }
 

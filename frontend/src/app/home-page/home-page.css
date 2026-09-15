@@ -9,6 +9,7 @@
     align-items:center;
     padding-top:100px;          /* navbar space */
     padding-bottom: 30px;
+    
 }
 
 .hero-greeting{
@@ -34,17 +35,16 @@
 
 .hero-description {
     color: #9b9b9b;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.8;
-    max-width: 960px;
-    margin-bottom: 30px;
-    overflow: hidden;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    margin-bottom: 40px;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
-.col-lg-7 {
-    overflow: hidden;
-}
+/* .col-lg-7 {
+    padding-right: 40px;
+} */
 
 /* Buttons */
 
@@ -109,7 +109,8 @@
 
 .profile-card {
 
-    width: 360px;
+    width: 100%;
+    max-width: 360px;
     height: 350px;
 
     background: #191919;
