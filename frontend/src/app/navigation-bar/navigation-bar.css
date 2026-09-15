@@ -41,6 +41,7 @@
     cursor: pointer;
     transition: .3s;
     position: relative;
+    user-select: none;
 }
 
 #nav-bar-inner-container-2 a:hover {
@@ -59,7 +60,7 @@
     height: 2px;
 
     background: #7c3aed;
-
+    
     transition: .3s;
 }
 
@@ -137,6 +138,7 @@
     font-size: 17px;
     transition: .3s;
     cursor: pointer;
+    user-select: none;
 }
 
 .mobile-menu a:hover {

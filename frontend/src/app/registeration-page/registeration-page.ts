@@ -3,6 +3,8 @@ import { Component, inject } from '@angular/core';
 import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterationService } from '../services/registeration';
 import { QuillModule } from 'ngx-quill';
+import { Router } from '@angular/router';
+import { UserStateService } from '../services/user-state';
 
 @Component({
 	selector: 'app-registeration-page',
@@ -19,10 +21,13 @@ export class RegisterationPage {
 			['clean']
 		]
 	};
+	private userState = inject(UserStateService);
 	private formBuilder = inject(FormBuilder);
 	private registerationService = inject(RegisterationService);
-
+	public existingImage: string | null = null;
+	public existingResume: string | null = null;	
 	userForm = this.formBuilder.group({
+		id: this.formBuilder.control(''),
 		name: this.formBuilder.control('',Validators.required),
 		jobrole: this.formBuilder.control('',Validators.required),
 		password: this.formBuilder.control('',Validators.required),
@@ -44,6 +49,56 @@ export class RegisterationPage {
 		])
 	})
 	
+	ngOnInit() {
+    const userData = this.userState.userData;
+    if (userData) {
+		this.userForm.get('image')?.clearValidators();
+        this.userForm.get('image')?.updateValueAndValidity();
+        
+        this.userForm.get('resume')?.clearValidators();
+        this.userForm.get('resume')?.updateValueAndValidity();
+        
+        this.userForm.get('password')?.clearValidators();
+        this.userForm.get('password')?.updateValueAndValidity();
+        // Patch basic fields
+		this.existingImage = userData.image;
+        this.existingResume = userData.resume;
+        this.userForm.patchValue({
+			id:userData.id,
+            name: userData.name,
+            jobrole: userData.jobRole,
+            description: userData.description[0]?.descripition,
+        });
+
+        // Patch skills
+        const skillsArray = this.skillArray();
+        skillsArray.clear();
+        userData.skills.forEach((skill: any) => {
+            skillsArray.push(this.formBuilder.control(skill.skill, Validators.required));
+        });
+
+        // Patch projects
+        const projectsArray = this.projectsArray();
+        projectsArray.clear();
+        userData.projects.forEach((project: any) => {
+            projectsArray.push(this.formBuilder.group({
+                title: [project.title, Validators.required],
+                description: [project.description, Validators.required]
+            }));
+        });
+
+        // Patch contacts
+        const contactsArray = this.contactArray();
+        contactsArray.clear();
+        userData.contacts.forEach((contact: any) => {
+            contactsArray.push(this.formBuilder.group({
+                contactType: [contact.contactType, Validators.required],
+                contactValue: [contact.contactValue, Validators.required]
+            }));
+        });
+    }
+}
+
 	onImageChanege(event: any) {
 		const file = event.target.files[0];
 		if (file) {
@@ -111,16 +166,23 @@ export class RegisterationPage {
 		if (this.userForm.valid) {
 			const formValue = this.userForm.value;
 			const formData = new FormData();
-
+			if(formValue.id)
+				formData.append('id',formValue.id);
 			formData.append('name', formValue.name ?? '');
-			formData.append('jobrole', formValue.jobrole ?? '');
+			formData.append('jobRole', formValue.jobrole ?? '');
 			formData.append('password', formValue.password ?? '');
 			formData.append('description', formValue.description ?? '');
 			if (formValue.image) {
 				formData.append('image', formValue.image);
 			}
+			else if (this.existingImage) {
+    			formData.append('image', this.existingImage);
+			}
 			if(formValue.resume){
 				formData.append('resume', formValue.resume);
+			}
+			else if (this.existingResume) {
+    			formData.append('resume', this.existingResume);
 			}
 			formValue.skills?.forEach((skill: string | null, index: number) => {
 				if (skill != null) {

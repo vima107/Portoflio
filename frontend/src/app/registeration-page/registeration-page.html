@@ -14,25 +14,43 @@
         </div>
         <div>
             <label for="image">Profile picture</label>
-            <input type="file" (change)="onImageChanege($event)">
+
+            @if(existingImage) {
+            <div>
+                <img [src]="'data:image/jpeg;base64,' + existingImage" width="80" height="80"
+                    style="border-radius: 50%; object-fit: cover; margin: 10px 0;">
+                <p style="color: #888; font-size: 12px;">Upload new image to replace</p>
+            </div>
+            }
+
+            <input type="file" (change)="onImageChanege($event)" accept="image/*">
         </div>
         <div>
             <label for="image">Resume</label>
-            <input type="file" (change)="onResumeChanege($event)">
+
+            @if(existingResume) {
+            <div>
+                <a [href]="'data:application/pdf;base64,' + existingResume" download="resume.pdf"
+                    style="color: #7c3aed;">
+                    Download current resume
+                </a>
+                <p style="color: #888; font-size: 12px;">Upload new file to replace</p>
+            </div>
+            }
+
+            <input type="file" (change)="onResumeChanege($event)" accept=".pdf">
         </div>
         <div>
             <label for="description">Description</label>
-            <quill-editor 
-              formControlName="description"
-              [modules]="quillModules"></quill-editor>
+            <quill-editor formControlName="description" [modules]="quillModules"></quill-editor>
         </div>
         <div>
             <label for="skill">Skills</label>
             <button type="button" (click)="addSkill()">+</button>
             <div formArrayName="skills">
                 @for (s of skillArray().controls; track $index) {
-                    <input [formControlName]="$index" placeholder="enter skill">
-                    <button type="button" (click)="removeSkill($index)">-</button>
+                <input [formControlName]="$index" placeholder="enter skill">
+                <button type="button" (click)="removeSkill($index)">-</button>
                 }
             </div>
         </div>
@@ -42,17 +60,14 @@
             <button type="button" (click)="addProject()">+</button>
             <div formArrayName="projects">
                 @for (p of projectsArray().controls; track $index) {
-                    <div [formGroupName]="$index">
+                <div [formGroupName]="$index">
                     <input formControlName="title" placeholder="enter title">
-                    <quill-editor formControlName="description"
-                      placeholder="enter description"
-                      rows="5"
-                      [modules]="quillModules"
-                      style="width: 10%; resize: both;"></quill-editor>
+                    <quill-editor formControlName="description" placeholder="enter description" rows="5"
+                        [modules]="quillModules" style="width: 10%; resize: both;"></quill-editor>
                     <button type="button" (click)="removeProject($index)">-</button>
                 </div>
                 }
-                
+
             </div>
         </div>
 
@@ -61,13 +76,13 @@
             <button type="button" (click)="addContact()">+</button>
             <div formArrayName="contacts">
                 @for(c of contactArray().controls; track $index){
-                    <div [formGroupName]="$index">
+                <div [formGroupName]="$index">
                     <input formControlName="contactType" placeholder="enter contact type">
                     <input formControlName="contactValue" placeholder="enter contact link">
                     <button type="button" (click)="removeContact($index)">-</button>
                 </div>
                 }
-                
+
             </div>
         </div>
         <div>
