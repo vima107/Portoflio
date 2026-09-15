@@ -7,7 +7,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class AdminLoginService {
     private http = inject(HttpClient)
-    private url="https://localhost:7018/portfolio/AdminLogin";
+    private url="https://portfolio-api-azcrdtcrb3aycsbf.centralus-01.azurewebsites.net/portfolio/AdminLogin";
 
     getDetails(data: any){
         console.log(data);
