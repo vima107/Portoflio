@@ -37,12 +37,14 @@ jobs:
         working-directory: ./frontend
         run: |
           ls -la node_modules/@angular/cli
-          ls -la node_modules/@angular/build
+          ls -la node_modules/.bin/ng
           npm list @angular/cli
 
       - name: Build Angular
         working-directory: ./frontend
-        run: npm run build
+        run: |
+          chmod +x node_modules/.bin/*
+          npm exec -- ng build
 
       - name: Build And Deploy
         id: builddeploy
