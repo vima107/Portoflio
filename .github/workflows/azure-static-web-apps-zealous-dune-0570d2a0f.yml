@@ -19,32 +19,36 @@ jobs:
     name: Build and Deploy Job
 
     steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
-          lfs: false
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: './frontend/package-lock.json'
 
       - name: Install dependencies
         working-directory: ./frontend
-        run: npm install --include=dev
+        run: |
+          rm -rf node_modules
+          npm ci --include=dev
 
-      - name: Check Angular CLI
+      - name: Verify Angular CLI
         working-directory: ./frontend
         run: |
-          ls -la node_modules/@angular/cli
-          ls -la node_modules/.bin/ng
+          echo "Checking Angular CLI..."
           npm list @angular/cli
+          echo "Checking ng.js..."
+          test -f node_modules/@angular/cli/bin/ng.js
+          echo "Angular CLI is installed correctly."
 
       - name: Build Angular
         working-directory: ./frontend
         run: |
-          chmod +x node_modules/.bin/*
-          npm exec -- ng build
+          chmod +x node_modules/@angular/cli/bin/ng.js
+          node node_modules/@angular/cli/bin/ng.js build
 
       - name: Build And Deploy
         id: builddeploy
