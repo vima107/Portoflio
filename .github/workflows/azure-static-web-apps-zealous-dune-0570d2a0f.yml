@@ -38,9 +38,7 @@ jobs:
       - name: Verify Angular CLI
         working-directory: ./frontend
         run: |
-          echo "Checking Angular CLI..."
           npm list @angular/cli
-          echo "Checking ng.js..."
           test -f node_modules/@angular/cli/bin/ng.js
           echo "Angular CLI is installed correctly."
 
@@ -50,6 +48,10 @@ jobs:
           chmod +x node_modules/@angular/cli/bin/ng.js
           node node_modules/@angular/cli/bin/ng.js build
 
+      - name: Copy Static Web Apps config
+        run: |
+          cp frontend/staticwebapp.config.json frontend/dist/portfolio-1/staticwebapp.config.json
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -57,9 +59,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ZEALOUS_DUNE_0570D2A0F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "./frontend"
+          app_location: "./frontend/dist/portfolio-1"
           api_location: ""
-          output_location: "dist/portfolio-1"
+          output_location: ""
           skip_app_build: true
 
   close_pull_request_job:
